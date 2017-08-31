@@ -24,6 +24,10 @@
 package cn.itgrocery.plugin.markdownip.config;
 
 import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -31,6 +35,12 @@ import org.jetbrains.annotations.Nullable;
  * @Date 2017/8/31 18:50
  * @Describle
  */
+@State(name = "markdown-image-paste",storages = {
+        @Storage(
+                id = "cn.itgrocery.plugin.markdownip",
+                file = "$APP_CONFIG$/markdown-image-paste-qiniu.xml"
+        )
+})
 public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig> {
     @Nullable
     @Override
@@ -40,6 +50,24 @@ public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig> {
 
     @Override
     public void loadState(QiNiuConfig state) {
+
+        XmlSerializerUtil.copyBean(state, this.state);
+    }
+
+    public static QiNiuConfig getinstance() {
+
+        return ServiceManager.getService(QiNiuConfig.class);
+    }
+
+    public State state = new State();
+
+    public static final class State {
+
+        public String accessKey;
+        public String secretKey;
+        public String bucket;
+        public String upHost;
+
 
     }
 }

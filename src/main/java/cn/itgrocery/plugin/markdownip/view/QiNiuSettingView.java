@@ -23,11 +23,12 @@
  */
 package cn.itgrocery.plugin.markdownip.view;
 
+import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
+
 import javax.swing.*;
 
 /**
  * @author Shannon Chen
- *
  */
 public class QiNiuSettingView {
     private JPanel settingContainer;
@@ -46,13 +47,6 @@ public class QiNiuSettingView {
         this.settingContainer = settingContainer;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("QiNiuSettingView");
-        frame.setContentPane(new QiNiuSettingView().settingContainer);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
     public JTextField getAccessKeyTextField() {
         return accessKeyTextField;
