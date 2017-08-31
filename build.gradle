@@ -10,13 +10,25 @@ buildscript {
     }
     dependencies {
         classpath "gradle.plugin.org.jetbrains:gradle-intellij-plugin:0.1.10"
+
     }
 }
 
 apply plugin: 'org.jetbrains.intellij'
+//above config for intelij idea
+
 apply plugin: 'java'
 
 group 'cn.itgrocery.markdownip'
 version 'v0.1.0'
 
 sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.qiniu:qiniu-java-sdk:7.2.+'
+}
+
