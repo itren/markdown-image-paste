@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url 'http://dl.bintray.com/jetbrains/intellij-plugin-service'
+        }
+
+    }
+    dependencies {
+        classpath "gradle.plugin.org.jetbrains:gradle-intellij-plugin:0.1.10"
+    }
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+group 'cn.itgrocery.markdownip'
+version 'v0.1.0'
+
+sourceCompatibility = 1.8

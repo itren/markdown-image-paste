@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>cn.itgrocery.plugin.markdownip</id>
+    <name>Markdown Image Paste</name>
+    <version>v0.1.0</version>
+    <vendor email="351135612@qq.com" url="http://www.itgrocery.cn">ITGrocery</vendor>
+
+    <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <editorActionHandler action="EditorPaste" implementationClass="img2md.PasteImageHandler" order="first"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group id="MarkdownImagePasteGroup" popup="true" text="Markdown Image Paste" icon="/icons/markdownImagePasteIcon.png">
+            <add-to-group group-id="ToolsMenu"/>
+            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuPreferences" id="QiNiuPreferences1" text="QiNiuPreferences1"></action>
+            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuPreferences" id="QiNiuPreferences2" text="QiNiuPreferences2"></action>
+        </group>
+    </actions>
+
+</idea-plugin>

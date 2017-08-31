@@ -1,0 +1,17 @@
+# IntelliJ
+out/
+.idea/
+target/
+*.iml
+local.properties
+
+### Java ###
+*.class
+classes/
+
+# Package Files #
+*.jar
+
+### Gradle ###
+.gradle
+build/
