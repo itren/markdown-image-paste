@@ -15,7 +15,7 @@ buildscript {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVewsion = '2.7'
+    gradleVersion = '2.0'
 }
 
 apply plugin: 'org.jetbrains.intellij'
