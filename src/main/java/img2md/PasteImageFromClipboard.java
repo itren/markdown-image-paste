@@ -1,5 +1,6 @@
 package img2md;
 
+import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -118,11 +119,11 @@ public class PasteImageFromClipboard extends AnAction {
         // todo should we silently override the image if it is already present?
 //        save(bufferedImage, imageFile, "png");
 
-        String accessKey = "sAWKWYjBXmju5_4q9Pa6DWJhDh5jo8UoWGeF301L";
-        String secretKey = "Mfami9crAT-58jw5YRwWHazLNGASZBGlMtNwzr6p";
-        String bucket = "develop";
-
-        String upHost = "http://ovj3eplzj.bkt.clouddn.com";
+        QiNiuConfig.State state = QiNiuConfig.getinstance().state;
+        String accessKey = state.accessKey;
+        String secretKey = state.secretKey;
+        String bucket = state.bucket;
+        String upHost = state.upHost;
         String imageUrl = "";
         try {
             String key = save(bufferedImage, "png", accessKey, secretKey, bucket);

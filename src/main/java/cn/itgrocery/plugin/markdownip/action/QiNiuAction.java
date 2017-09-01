@@ -29,8 +29,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 /**
  * @author Shannon Chen
  */
-public class QiNiuPreferences extends AnAction {
-
+public class QiNiuAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {

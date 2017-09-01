@@ -1,8 +1,6 @@
 package img2md;
 
-
 import cn.itgrocery.plugin.markdownip.util.QiNiuUtil;
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +11,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.*;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -91,9 +90,9 @@ public class ImageUtils {
 
     public static String save(BufferedImage image, String format, String accessKey, String secretKey, String upHost) throws IOException {
 
-        ByteOutputStream byteOutputStream = new ByteOutputStream();
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ImageIO.write(image, format, byteOutputStream);
-        return QiNiuUtil.uploadImage(byteOutputStream.getBytes(), accessKey, secretKey, upHost);
+        return QiNiuUtil.uploadImage(byteOutputStream.toByteArray(), accessKey, secretKey, upHost);
 
     }
 

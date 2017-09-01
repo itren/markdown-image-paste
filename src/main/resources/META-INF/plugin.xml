@@ -50,21 +50,27 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <editorActionHandler action="EditorPaste" implementationClass="img2md.PasteImageHandler" order="first"/>
+        <editorActionHandler action="EditorPaste"
+                             implementationClass="cn.itgrocery.plugin.markdownip.handler.PasteImageHandler"
+                             order="first"/>
+
         <applicationService serviceInterface="cn.itgrocery.plugin.markdownip.config.QiNiuConfig"
                             serviceImplementation="cn.itgrocery.plugin.markdownip.config.QiNiuConfig"/>
+
         <applicationConfigurable groupId="tools" instance="cn.itgrocery.plugin.markdownip.view.QiNiuSettingView"/>
+
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
         <group id="MarkdownImagePasteGroup" popup="true" text="Markdown Image Paste"
                icon="/icons/markdownImagePasteIcon.png">
+
             <add-to-group group-id="ToolsMenu"/>
-            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuPreferences" id="QiNiuPreferences1"
-                    text="QiNiuPreferences1"></action>
-            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuPreferences" id="QiNiuPreferences2"
-                    text="QiNiuPreferences2"></action>
+
+            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuAction" id="QiNiuAction"
+                    text="QiNiu" icon="/icons/markdownImagePasteChecked.png"></action>
+
         </group>
     </actions>
 

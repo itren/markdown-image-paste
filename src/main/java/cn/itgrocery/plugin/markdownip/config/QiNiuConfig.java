@@ -35,21 +35,23 @@ import org.jetbrains.annotations.Nullable;
  * @Date 2017/8/31 18:50
  * @Describle
  */
-@State(name = "markdown-image-paste",storages = {
-        @Storage(
-                id = "cn.itgrocery.plugin.markdownip",
-                file = "$APP_CONFIG$/markdown-image-paste-qiniu.xml"
-        )
-})
-public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig> {
+@State(
+        name = "markdown-image-paste",
+        storages = {
+                @Storage(
+                        id = "markdown-image-paste",
+                        file = "$APP_CONFIG$/markdown-image-paste-qiniu_config.xml"
+                )
+        })
+public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig.State> {
     @Nullable
     @Override
-    public QiNiuConfig getState() {
-        return null;
+    public QiNiuConfig.State getState() {
+        return this.state;
     }
 
     @Override
-    public void loadState(QiNiuConfig state) {
+    public void loadState(QiNiuConfig.State state) {
 
         XmlSerializerUtil.copyBean(state, this.state);
     }

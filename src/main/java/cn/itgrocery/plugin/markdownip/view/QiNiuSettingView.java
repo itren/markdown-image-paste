@@ -30,13 +30,11 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  * @author Shannon Chen
  */
-public class QiNiuSettingView implements Configurable{
+public class QiNiuSettingView implements Configurable {
 
     private JPanel settingContainer;
     private JTextField accessKeyTextField;
@@ -52,92 +50,10 @@ public class QiNiuSettingView implements Configurable{
 
     public QiNiuSettingView() {
 
-
-//        intiView();
-        setListener();
+        intiView();
 
     }
 
-    private void setListener() {
-
-        accessKeyTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-                state.accessKey = accessKeyTextField.getText();
-                System.out.println("accessKey insert: " + state.accessKey);
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-                state.accessKey = accessKeyTextField.getText();
-                System.out.println("accessKey remove: " + state.accessKey);
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-                state.accessKey = accessKeyTextField.getText();
-                System.out.println("accessKey change: " + state.accessKey);
-            }
-        });
-
-        secretKeyTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                state.secretKey = secretKeyTextField.getText();
-                System.out.println("secretKey: " + state.secretKey);
-            }
-        });
-
-        bucketTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                state.bucket = bucketTextField.getText();
-                System.out.println("bucket: " + state.bucket);
-            }
-        });
-
-        upHostTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                state.upHost = upHostTextField.getText();
-                System.out.println("upHost: " + state.upHost);
-            }
-        });
-
-    }
 
     private void intiView() {
 
@@ -217,11 +133,24 @@ public class QiNiuSettingView implements Configurable{
 
     @Override
     public boolean isModified() {
-        return false;
+
+        return true;
     }
 
     @Override
     public void apply() throws ConfigurationException {
+
+        state.accessKey = accessKeyTextField.getText();
+        state.secretKey = secretKeyTextField.getText();
+        state.bucket = bucketTextField.getText();
+        state.upHost = upHostTextField.getText();
+
+        System.out.println("***** APPLAY *****");
+        System.out.println(state.accessKey);
+        System.out.println(state.secretKey);
+        System.out.println(state.bucket);
+        System.out.println(state.upHost);
+        System.out.println("***** END ********");
 
     }
 }

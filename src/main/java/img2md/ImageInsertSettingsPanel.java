@@ -4,8 +4,6 @@
 
 package img2md;
 
-import cn.itgrocery.plugin.markdownip.action.QiNiuPreferences;
-import cn.itgrocery.plugin.markdownip.view.QiNiuSettingView;
 import com.intellij.ide.util.PropertiesComponent;
 
 import javax.swing.*;
