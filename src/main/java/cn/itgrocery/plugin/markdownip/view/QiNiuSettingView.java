@@ -26,6 +26,7 @@ package cn.itgrocery.plugin.markdownip.view;
 import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.util.Comparing;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -133,8 +134,16 @@ public class QiNiuSettingView implements Configurable {
 
     @Override
     public boolean isModified() {
+        if (Comparing.equal(state.accessKey, accessKeyTextField.getText())
+                && Comparing.equal(state.secretKey, secretKeyTextField.getText())
+                && Comparing.equal(state.bucket, bucketTextField.getText())
+                && Comparing.equal(state.upHost, upHostTextField.getText())) {
 
-        return true;
+            return false;
+        } else {
+
+            return true;
+        }
     }
 
     @Override

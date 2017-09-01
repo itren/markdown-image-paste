@@ -33,15 +33,15 @@ import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
-import img2md.ImageUtils;
+import cn.itgrocery.plugin.markdownip.util.ImageUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import static img2md.ImageUtils.save;
-import static img2md.ImageUtils.toBufferedImage;
+import static cn.itgrocery.plugin.markdownip.util.ImageUtils.save;
+import static cn.itgrocery.plugin.markdownip.util.ImageUtils.toBufferedImage;
 
 /**
  * @Author chenxl

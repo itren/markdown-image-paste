@@ -1,4 +1,4 @@
-package img2md;
+package cn.itgrocery.plugin.markdownip.util;
 
 import cn.itgrocery.plugin.markdownip.util.QiNiuUtil;
 
