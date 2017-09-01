@@ -24,6 +24,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -115,7 +116,20 @@ public class PasteImageFromClipboard extends AnAction {
         File imageFile = new File(imageDir, imageName + ".png");
 
         // todo should we silently override the image if it is already present?
-        save(bufferedImage, imageFile, "png");
+//        save(bufferedImage, imageFile, "png");
+
+        String accessKey = "sAWKWYjBXmju5_4q9Pa6DWJhDh5jo8UoWGeF301L";
+        String secretKey = "Mfami9crAT-58jw5YRwWHazLNGASZBGlMtNwzr6p";
+        String bucket = "develop";
+
+        String upHost = "http://ovj3eplzj.bkt.clouddn.com";
+        String imageUrl = "";
+        try {
+            String key = save(bufferedImage, "png", accessKey, secretKey, bucket);
+            imageUrl = upHost + "/" + key;
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
 //        PropertiesComponent.getInstance()
 
@@ -135,7 +149,8 @@ public class PasteImageFromClipboard extends AnAction {
 //        }
 
         // inject image element current markdown document
-        insertImageElement(ed, curDocument.getParentFile().toPath().relativize(imageFile.toPath()).toFile());
+//        insertImageElement(ed, curDocument.getParentFile().toPath().relativize(imageFile.toPath()).toFile());
+        insertImageElement(ed, imageUrl);
 
         // https://intellij-support.jetbrains.com/hc/en-us/community/posts/206144389-Create-virtual-file-from-file-path
         VirtualFile fileByPath = LocalFileSystem.getInstance().refreshAndFindFileByIoFile(imageFile);
@@ -156,6 +171,11 @@ public class PasteImageFromClipboard extends AnAction {
     private void insertImageElement(final @NotNull Editor editor, File imageFile) {
         Runnable r = () -> EditorModificationUtil.insertStringAtCaret(editor, "![](" + imageFile.toString() + ")");
 
+        WriteCommandAction.runWriteCommandAction(editor.getProject(), r);
+    }
+
+    private void insertImageElement(final @NotNull Editor editor, String imageUrl) {
+        Runnable r = () -> EditorModificationUtil.insertStringAtCaret(editor, "![](" + imageUrl + ")");
         WriteCommandAction.runWriteCommandAction(editor.getProject(), r);
     }
 

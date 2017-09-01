@@ -1,6 +1,9 @@
 package img2md;
 
 
+import cn.itgrocery.plugin.markdownip.util.QiNiuUtil;
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -84,6 +87,14 @@ public class ImageUtils {
         } catch (Throwable e) {
             System.out.println("Write error for " + file.getPath() + ": " + e.getMessage());
         }
+    }
+
+    public static String save(BufferedImage image, String format, String accessKey, String secretKey, String upHost) throws IOException {
+
+        ByteOutputStream byteOutputStream = new ByteOutputStream();
+        ImageIO.write(image, format, byteOutputStream);
+        return QiNiuUtil.uploadImage(byteOutputStream.getBytes(), accessKey, secretKey, upHost);
+
     }
 
 

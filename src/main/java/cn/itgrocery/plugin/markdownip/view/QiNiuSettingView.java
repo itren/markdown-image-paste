@@ -24,13 +24,20 @@
 package cn.itgrocery.plugin.markdownip.view;
 
 import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
+import com.intellij.openapi.options.Configurable;
+import com.intellij.openapi.options.ConfigurationException;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  * @author Shannon Chen
  */
-public class QiNiuSettingView {
+public class QiNiuSettingView implements Configurable{
+
     private JPanel settingContainer;
     private JTextField accessKeyTextField;
     private JTextField secretKeyTextField;
@@ -39,6 +46,107 @@ public class QiNiuSettingView {
     private JButton okButton;
     private JButton cancelButton;
 
+    private QiNiuConfig qiNiuConfig = QiNiuConfig.getinstance();
+    private QiNiuConfig.State state = qiNiuConfig.state;
+
+
+    public QiNiuSettingView() {
+
+
+//        intiView();
+        setListener();
+
+    }
+
+    private void setListener() {
+
+        accessKeyTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+                state.accessKey = accessKeyTextField.getText();
+                System.out.println("accessKey insert: " + state.accessKey);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+                state.accessKey = accessKeyTextField.getText();
+                System.out.println("accessKey remove: " + state.accessKey);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+                state.accessKey = accessKeyTextField.getText();
+                System.out.println("accessKey change: " + state.accessKey);
+            }
+        });
+
+        secretKeyTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                state.secretKey = secretKeyTextField.getText();
+                System.out.println("secretKey: " + state.secretKey);
+            }
+        });
+
+        bucketTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                state.bucket = bucketTextField.getText();
+                System.out.println("bucket: " + state.bucket);
+            }
+        });
+
+        upHostTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                state.upHost = upHostTextField.getText();
+                System.out.println("upHost: " + state.upHost);
+            }
+        });
+
+    }
+
+    private void intiView() {
+
+        accessKeyTextField.setText(state.accessKey);
+        secretKeyTextField.setText(state.secretKey);
+        bucketTextField.setText(state.bucket);
+        upHostTextField.setText(state.upHost);
+    }
+
     public JPanel getSettingContainer() {
         return settingContainer;
     }
@@ -46,7 +154,6 @@ public class QiNiuSettingView {
     public void setSettingContainer(JPanel settingContainer) {
         this.settingContainer = settingContainer;
     }
-
 
     public JTextField getAccessKeyTextField() {
         return accessKeyTextField;
@@ -94,5 +201,27 @@ public class QiNiuSettingView {
 
     public void setCancelButton(JButton cancelButton) {
         this.cancelButton = cancelButton;
+    }
+
+    @Nls
+    @Override
+    public String getDisplayName() {
+        return "Markdown Image Paste";
+    }
+
+    @Nullable
+    @Override
+    public JComponent createComponent() {
+        return settingContainer;
+    }
+
+    @Override
+    public boolean isModified() {
+        return false;
+    }
+
+    @Override
+    public void apply() throws ConfigurationException {
+
     }
 }

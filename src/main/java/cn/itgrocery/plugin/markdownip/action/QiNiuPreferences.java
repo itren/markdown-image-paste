@@ -23,52 +23,17 @@
  */
 package cn.itgrocery.plugin.markdownip.action;
 
-import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
-import cn.itgrocery.plugin.markdownip.view.QiNiuSettingView;
-import com.intellij.idea.LoggerFactory;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.ui.DialogBuilder;
-
-import javax.swing.*;
 
 /**
  * @author Shannon Chen
  */
 public class QiNiuPreferences extends AnAction {
 
-    private Logger logger = Logger.getInstance(QiNiuPreferences.class);
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
 
-        showQiNiuSettingView();
-    }
-
-    private void showQiNiuSettingView() {
-        DialogBuilder builder = new DialogBuilder();
-        QiNiuSettingView qiNiuSettingView = new QiNiuSettingView();
-        JPanel settingContainer = qiNiuSettingView.getSettingContainer();
-        builder.setCenterPanel(settingContainer);
-        builder.addOkAction();
-        builder.addCancelAction();
-        builder.setOkOperation(() -> {
-
-            QiNiuConfig qiNiuConfig = QiNiuConfig.getinstance();
-            QiNiuConfig.State state = qiNiuConfig.state;
-            state.accessKey = qiNiuSettingView.getAccessKeyTextField().getText();
-            state.secretKey = qiNiuSettingView.getSecretKeyTextField().getText();
-            state.bucket = qiNiuSettingView.getBucketTextField().getText();
-            state.upHost = qiNiuSettingView.getUpHostTextField().getText();
-
-            logger.info(String.format("QiNiu Access Key: %s",state.accessKey));
-            logger.info(String.format("QiNiu Access Key: %s",state.accessKey));
-            logger.info(String.format("QiNiu Access Key: %s",state.accessKey));
-            logger.info(String.format("QiNiu Access Key: %s",state.accessKey));
-        });
-
-
-        builder.show();
     }
 }
