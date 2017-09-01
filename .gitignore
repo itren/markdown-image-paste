@@ -9,8 +9,6 @@ local.properties
 *.class
 classes/
 
-# Package Files #
-*.jar
 
 ### Gradle ###
 .gradle

@@ -14,10 +14,6 @@ buildscript {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
-}
-
 apply plugin: 'org.jetbrains.intellij'
 //above config for intelij idea
 
