@@ -1,7 +1,5 @@
 package cn.itgrocery.plugin.markdownip.util;
 
-import cn.itgrocery.plugin.markdownip.util.QiNiuUtil;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -88,11 +86,11 @@ public class ImageUtils {
         }
     }
 
-    public static String save(BufferedImage image, String format, String accessKey, String secretKey, String upHost) throws IOException {
+    public static String save(BufferedImage image, String preFix, String format, String accessKey, String secretKey, String upHost) throws IOException {
 
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         ImageIO.write(image, format, byteOutputStream);
-        return QiNiuUtil.uploadImage(byteOutputStream.toByteArray(), accessKey, secretKey, upHost);
+        return QiNiuUtils.uploadImage(byteOutputStream.toByteArray(), preFix, accessKey, secretKey, upHost);
 
     }
 

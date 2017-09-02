@@ -36,10 +36,10 @@ import org.jetbrains.annotations.Nullable;
  * @Describle
  */
 @State(
-        name = "markdown-image-paste",
+        name = "markdown-image-paste-qiniu",
         storages = {
                 @Storage(
-                        id = "markdown-image-paste",
+                        id = "markdown-image-paste-qiniu",
                         file = "$APP_CONFIG$/markdown-image-paste-qiniu_config.xml"
                 )
         })

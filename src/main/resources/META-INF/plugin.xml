@@ -25,17 +25,16 @@
 <idea-plugin>
     <id>cn.itgrocery.plugin.markdownip</id>
     <name>Markdown Image Paste</name>
-    <version>v0.1.0</version>
-    <vendor email="351135612@qq.com" url="http://www.itgrocery.cn">ITGrocery</vendor>
+    <version>v0.1.1</version>
+    <vendor email="351135612@qq.com" url="https://github.com/ITGrocery/markdown-image-paste">Github</vendor>
 
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
-    ]]></description>
+        Uploading image on clickbord to QiNiuYun and insert image link in current markdown file.
+      ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      Support setting preFix<br>
+      Paste image link<br>
     ]]>
     </change-notes>
 
@@ -57,21 +56,24 @@
         <applicationService serviceInterface="cn.itgrocery.plugin.markdownip.config.QiNiuConfig"
                             serviceImplementation="cn.itgrocery.plugin.markdownip.config.QiNiuConfig"/>
 
-        <applicationConfigurable groupId="tools" instance="cn.itgrocery.plugin.markdownip.view.QiNiuSettingView"/>
+        <applicationService serviceInterface="cn.itgrocery.plugin.markdownip.config.LocalConfig"
+                            serviceImplementation="cn.itgrocery.plugin.markdownip.config.LocalConfig"/>
+
+        <applicationConfigurable groupId="tools" instance="cn.itgrocery.plugin.markdownip.view.SettingView"/>
 
     </extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-        <group id="MarkdownImagePasteGroup" popup="true" text="Markdown Image Paste"
-               icon="/icons/markdownImagePasteIcon.png">
+    <!--<actions>-->
+        <!--&lt;!&ndash; Add your actions here &ndash;&gt;-->
+        <!--<group id="MarkdownImagePasteGroup" popup="true" text="Markdown Image Paste"-->
+               <!--icon="/icons/markdownImagePasteIcon.png">-->
 
-            <add-to-group group-id="ToolsMenu"/>
+            <!--<add-to-group group-id="ToolsMenu"/>-->
 
-            <action class="cn.itgrocery.plugin.markdownip.action.QiNiuAction" id="QiNiuAction"
-                    text="QiNiu" icon="/icons/markdownImagePasteChecked.png"></action>
+            <!--<action class="cn.itgrocery.plugin.markdownip.action.QiNiuAction" id="QiNiuAction"-->
+                    <!--text="QiNiu" icon="/icons/markdownImagePasteChecked.png"></action>-->
 
-        </group>
-    </actions>
+        <!--</group>-->
+    <!--</actions>-->
 
 </idea-plugin>

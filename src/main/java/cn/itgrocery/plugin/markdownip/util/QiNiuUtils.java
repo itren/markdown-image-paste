@@ -14,17 +14,23 @@ import com.qiniu.util.Auth;
  * @Date 2017/9/1 13:30
  * @Describle
  */
-public class QiNiuUtil {
+public class QiNiuUtils {
 
-    public static String uploadImage(byte[] uploadBytes, String accessKey, String secretKey, String bucket) {
+    public static String uploadImage(byte[] uploadBytes, String preFix, String accessKey, String secretKey, String bucket) {
+
+        if (preFix == null || preFix.isEmpty()) {
+
+            preFix = "markdown-image-paste";
+        }
 
         Configuration cfg = new Configuration(Zone.zone2());
         UploadManager uploadManager = new UploadManager(cfg);
         String key = "";
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken = auth.uploadToken(bucket);
+        System.out.println("token: " + upToken);
         try {
-            Response response = uploadManager.put(uploadBytes, "markdown-image-paste-" + System.currentTimeMillis(), upToken);
+            Response response = uploadManager.put(uploadBytes, preFix + "-" + System.currentTimeMillis(), upToken);
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
             key = putRet.key;
             System.out.println("key: " + putRet.key);
@@ -41,6 +47,12 @@ public class QiNiuUtil {
 
         return key;
 
+    }
+
+    public static String getToken(String accessKey, String secretKey, String bucket) {
+
+        Auth auth = Auth.create(accessKey, secretKey);
+        return auth.uploadToken(bucket);
     }
 
 }

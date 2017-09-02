@@ -20,7 +20,7 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
 group 'cn.itgrocery.markdownip'
-version 'v0.1.0'
+version 'v0.1.1'
 
 sourceCompatibility = 1.8
 

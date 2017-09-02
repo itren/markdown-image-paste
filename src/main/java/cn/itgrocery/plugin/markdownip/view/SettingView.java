@@ -23,7 +23,9 @@
  */
 package cn.itgrocery.plugin.markdownip.view;
 
+import cn.itgrocery.plugin.markdownip.config.LocalConfig;
 import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
+import cn.itgrocery.plugin.markdownip.util.QiNiuUtils;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.Comparing;
@@ -31,37 +33,86 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author Shannon Chen
  */
-public class QiNiuSettingView implements Configurable {
+public class SettingView implements Configurable {
 
     private JPanel settingContainer;
     private JTextField accessKeyTextField;
     private JTextField secretKeyTextField;
     private JTextField bucketTextField;
     private JTextField upHostTextField;
+    private JRadioButton eastChinaRadioButton;
+    private JRadioButton nortChinaRadioButton;
+    private JRadioButton southChinaRadioButton;
+    private JRadioButton northAmeriaRadioButton;
+    private JButton clickTestingButton;
+    private JCheckBox alwaysSaveImageInCheckBox;
+    private JTextField markdownImagePasteTextField;
     private JButton okButton;
     private JButton cancelButton;
 
-    private QiNiuConfig qiNiuConfig = QiNiuConfig.getinstance();
-    private QiNiuConfig.State state = qiNiuConfig.state;
+    private QiNiuConfig.State qiNiuState = QiNiuConfig.getinstance().state;
+    private LocalConfig.State localState = LocalConfig.getInstance().state;
 
 
-    public QiNiuSettingView() {
+    public SettingView() {
 
         intiView();
+
+        addListener();
+
+    }
+
+    private void addListener() {
+
+        clickTestingButton.addActionListener(e -> {
+
+            String accessKeyTextFieldText = accessKeyTextField.getText();
+            String secretKeyTextFieldText = secretKeyTextField.getText();
+            String bucketTextFieldText = bucketTextField.getText();
+            String token = QiNiuUtils.getToken(accessKeyTextFieldText, secretKeyTextFieldText, bucketTextFieldText);
+            System.out.println("testing: " + token);
+        });
 
     }
 
 
     private void intiView() {
 
-        accessKeyTextField.setText(state.accessKey);
-        secretKeyTextField.setText(state.secretKey);
-        bucketTextField.setText(state.bucket);
-        upHostTextField.setText(state.upHost);
+
+        initLocalConfigView();
+
+        accessKeyTextField.setText(qiNiuState.accessKey);
+        secretKeyTextField.setText(qiNiuState.secretKey);
+        bucketTextField.setText(qiNiuState.bucket);
+        upHostTextField.setText(qiNiuState.upHost);
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(eastChinaRadioButton);
+        buttonGroup.add(nortChinaRadioButton);
+        buttonGroup.add(southChinaRadioButton);
+        buttonGroup.add(northAmeriaRadioButton);
+
+
+    }
+
+    private void initLocalConfigView() {
+
+        if (localState.saveLoal) {
+
+            alwaysSaveImageInCheckBox.setSelected(true);
+        } else {
+
+            alwaysSaveImageInCheckBox.setSelected(false);
+        }
+
+        markdownImagePasteTextField.setText(localState.preFix);
+
     }
 
     public JPanel getSettingContainer() {
@@ -134,10 +185,12 @@ public class QiNiuSettingView implements Configurable {
 
     @Override
     public boolean isModified() {
-        if (Comparing.equal(state.accessKey, accessKeyTextField.getText())
-                && Comparing.equal(state.secretKey, secretKeyTextField.getText())
-                && Comparing.equal(state.bucket, bucketTextField.getText())
-                && Comparing.equal(state.upHost, upHostTextField.getText())) {
+        if (Comparing.equal(qiNiuState.accessKey, accessKeyTextField.getText())
+                && Comparing.equal(qiNiuState.secretKey, secretKeyTextField.getText())
+                && Comparing.equal(qiNiuState.bucket, bucketTextField.getText())
+                && Comparing.equal(qiNiuState.upHost, upHostTextField.getText())
+                && Comparing.equal(localState.preFix, alwaysSaveImageInCheckBox.isSelected())
+                && Comparing.equal(localState.preFix, markdownImagePasteTextField.getText())) {
 
             return false;
         } else {
@@ -149,16 +202,19 @@ public class QiNiuSettingView implements Configurable {
     @Override
     public void apply() throws ConfigurationException {
 
-        state.accessKey = accessKeyTextField.getText();
-        state.secretKey = secretKeyTextField.getText();
-        state.bucket = bucketTextField.getText();
-        state.upHost = upHostTextField.getText();
+        localState.saveLoal = alwaysSaveImageInCheckBox.isSelected();
+        localState.preFix = markdownImagePasteTextField.getText();
+
+        qiNiuState.accessKey = accessKeyTextField.getText();
+        qiNiuState.secretKey = secretKeyTextField.getText();
+        qiNiuState.bucket = bucketTextField.getText();
+        qiNiuState.upHost = upHostTextField.getText();
 
         System.out.println("***** APPLAY *****");
-        System.out.println(state.accessKey);
-        System.out.println(state.secretKey);
-        System.out.println(state.bucket);
-        System.out.println(state.upHost);
+        System.out.println(qiNiuState.accessKey);
+        System.out.println(qiNiuState.secretKey);
+        System.out.println(qiNiuState.bucket);
+        System.out.println(qiNiuState.upHost);
         System.out.println("***** END ********");
 
     }
