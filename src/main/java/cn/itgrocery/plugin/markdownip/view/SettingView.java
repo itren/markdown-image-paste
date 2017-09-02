@@ -29,6 +29,7 @@ import cn.itgrocery.plugin.markdownip.util.QiNiuUtils;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.Comparing;
+import com.intellij.util.messages.impl.Message;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,11 +51,9 @@ public class SettingView implements Configurable {
     private JRadioButton nortChinaRadioButton;
     private JRadioButton southChinaRadioButton;
     private JRadioButton northAmeriaRadioButton;
-    private JButton clickTestingButton;
     private JCheckBox alwaysSaveImageInCheckBox;
     private JTextField markdownImagePasteTextField;
-    private JButton okButton;
-    private JButton cancelButton;
+
 
     private QiNiuConfig.State qiNiuState = QiNiuConfig.getinstance().state;
     private LocalConfig.State localState = LocalConfig.getInstance().state;
@@ -70,15 +69,6 @@ public class SettingView implements Configurable {
 
     private void addListener() {
 
-        clickTestingButton.addActionListener(e -> {
-
-            String accessKeyTextFieldText = accessKeyTextField.getText();
-            String secretKeyTextFieldText = secretKeyTextField.getText();
-            String bucketTextFieldText = bucketTextField.getText();
-            String token = QiNiuUtils.getToken(accessKeyTextFieldText, secretKeyTextFieldText, bucketTextFieldText);
-            System.out.println("testing: " + token);
-        });
-
     }
 
 
@@ -86,6 +76,12 @@ public class SettingView implements Configurable {
 
 
         initLocalConfigView();
+
+        initQiNiuView();
+
+    }
+
+    private void initQiNiuView() {
 
         accessKeyTextField.setText(qiNiuState.accessKey);
         secretKeyTextField.setText(qiNiuState.secretKey);
@@ -98,7 +94,35 @@ public class SettingView implements Configurable {
         buttonGroup.add(southChinaRadioButton);
         buttonGroup.add(northAmeriaRadioButton);
 
+        if (qiNiuState.zone == null) {
 
+            qiNiuState.zone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_SOUTH_CHINA;
+        }
+
+        switch (qiNiuState.zone) {
+
+            case QINIU_ZONE_EASE_CHINA:
+
+                eastChinaRadioButton.setSelected(true);
+                break;
+
+            case QINIU_ZONE_NORTH_CHINA:
+
+                nortChinaRadioButton.setSelected(true);
+                break;
+
+            case QINIU_ZONE_SOUTH_CHINA:
+
+                southChinaRadioButton.setSelected(true);
+                break;
+
+
+            case QINIU_ZONE_NORTH_AMERICA:
+
+                northAmeriaRadioButton.setSelected(true);
+                break;
+
+        }
     }
 
     private void initLocalConfigView() {
@@ -155,21 +179,6 @@ public class SettingView implements Configurable {
         this.upHostTextField = upHostTextField;
     }
 
-    public JButton getOkButton() {
-        return okButton;
-    }
-
-    public void setOkButton(JButton okButton) {
-        this.okButton = okButton;
-    }
-
-    public JButton getCancelButton() {
-        return cancelButton;
-    }
-
-    public void setCancelButton(JButton cancelButton) {
-        this.cancelButton = cancelButton;
-    }
 
     @Nls
     @Override
@@ -183,14 +192,37 @@ public class SettingView implements Configurable {
         return settingContainer;
     }
 
+    private QiNiuConfig.QINIU_ZONE getCurrentSelectZone(){
+
+        QiNiuConfig.QINIU_ZONE currentZone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_SOUTH_CHINA;
+        if(eastChinaRadioButton.isSelected()){
+
+            currentZone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_EASE_CHINA;
+        }else if(nortChinaRadioButton.isSelected()){
+
+            currentZone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_NORTH_CHINA;
+        }else if(southChinaRadioButton.isSelected()){
+
+            currentZone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_SOUTH_CHINA;
+        }else if(northAmeriaRadioButton.isSelected()){
+
+            currentZone = QiNiuConfig.QINIU_ZONE.QINIU_ZONE_NORTH_AMERICA;
+        }
+        return currentZone;
+    }
+
     @Override
     public boolean isModified() {
+
+
+
         if (Comparing.equal(qiNiuState.accessKey, accessKeyTextField.getText())
                 && Comparing.equal(qiNiuState.secretKey, secretKeyTextField.getText())
                 && Comparing.equal(qiNiuState.bucket, bucketTextField.getText())
                 && Comparing.equal(qiNiuState.upHost, upHostTextField.getText())
-                && Comparing.equal(localState.preFix, alwaysSaveImageInCheckBox.isSelected())
-                && Comparing.equal(localState.preFix, markdownImagePasteTextField.getText())) {
+                && Comparing.equal(localState.saveLoal, alwaysSaveImageInCheckBox.isSelected())
+                && Comparing.equal(localState.preFix, markdownImagePasteTextField.getText())
+                && Comparing.equal(qiNiuState.zone,getCurrentSelectZone())) {
 
             return false;
         } else {
@@ -198,6 +230,8 @@ public class SettingView implements Configurable {
             return true;
         }
     }
+
+
 
     @Override
     public void apply() throws ConfigurationException {
@@ -209,12 +243,14 @@ public class SettingView implements Configurable {
         qiNiuState.secretKey = secretKeyTextField.getText();
         qiNiuState.bucket = bucketTextField.getText();
         qiNiuState.upHost = upHostTextField.getText();
+        qiNiuState.zone = getCurrentSelectZone();
 
         System.out.println("***** APPLAY *****");
         System.out.println(qiNiuState.accessKey);
         System.out.println(qiNiuState.secretKey);
         System.out.println(qiNiuState.bucket);
         System.out.println(qiNiuState.upHost);
+        System.out.println(qiNiuState.zone);
         System.out.println("***** END ********");
 
     }
