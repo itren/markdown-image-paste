@@ -60,13 +60,13 @@
 
 ![](/art/qiniuyun-zone-bucket-uphost-location.png)
 
-#### 使用
+## 使用
 
 该插件只会在 Markdown 文档中粘贴时才会进行响应。目前的快捷键是 'Ctrl + V'（Windows）、‘Command + V’（Mac） ，后续添加自定义快捷键功能。
 
 ![](/art/markdown-image-paste-using.gif)
 
-#### 测试
+## 测试
 
 该插件没有在很多的环境下测试过，如果你在使用的过程中发现问题，可以在项目的 [Issues](https://github.com/ITGrocery/markdown-image-paste/issues) 中提出你的问题，我会尽快回复并处理。
 
