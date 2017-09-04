@@ -74,7 +74,7 @@
 |--- | --- | --- |
 | macOS Sierra 10.12.6 | Oracle JDK 1.8.0_144 | InteliJ IDEA ULTIMATE 2017.2
 
-#### 参考
+## 参考
 
 * [pasteimages](https://github.com/holgerbrandl/pasteimages)
 * [activate-power-mode](https://github.com/ViceFantasyPlace/activate-power-mode)
