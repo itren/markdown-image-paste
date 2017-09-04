@@ -23,6 +23,7 @@
  */
 package cn.itgrocery.plugin.markdownip.handler;
 
+import cn.itgrocery.plugin.markdownip.config.LocalConfig;
 import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -30,13 +31,16 @@ import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
+import com.intellij.openapi.editor.actionSystem.EditorTextInsertHandler;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import cn.itgrocery.plugin.markdownip.util.ImageUtils;
+import com.intellij.util.Producer;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
+import java.awt.datatransfer.Transferable;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -48,7 +52,7 @@ import static cn.itgrocery.plugin.markdownip.util.ImageUtils.toBufferedImage;
  * @Date 2017/9/1 16:13
  * @Describle
  */
-public class PasteImageHandler extends EditorActionHandler {
+public class PasteImageHandler extends EditorActionHandler implements EditorTextInsertHandler {
 
     private final EditorActionHandler myOriginalHandler;
 
@@ -71,13 +75,15 @@ public class PasteImageHandler extends EditorActionHandler {
                         assert caret == null : "Invocation of 'paste' operation for specific caret is not supported";
 
                         BufferedImage bufferedImage = toBufferedImage(imageFromClipboard);
-                        QiNiuConfig.State state = QiNiuConfig.getinstance().state;
-                        String accessKey = state.accessKey;
-                        String secretKey = state.secretKey;
-                        String bucket = state.bucket;
-                        String upHost = state.upHost;
+                        QiNiuConfig.State qiNiuState = QiNiuConfig.getinstance().state;
+                        LocalConfig.State localState = LocalConfig.getInstance().state;
+                        String accessKey = qiNiuState.accessKey;
+                        String secretKey = qiNiuState.secretKey;
+                        String bucket = qiNiuState.bucket;
+                        String upHost = qiNiuState.upHost;
+                        String preFix = localState.preFix;
                         try {
-                            String key = save(bufferedImage, "png", accessKey, secretKey, bucket);
+                            String key = save(bufferedImage, preFix, "png", accessKey, secretKey, bucket);
                             String imageUrl = upHost + "/" + key;
                             Runnable r = () -> EditorModificationUtil.insertStringAtCaret(editor, "![](" + imageUrl + ")");
                             WriteCommandAction.runWriteCommandAction(editor.getProject(), r);
@@ -93,5 +99,10 @@ public class PasteImageHandler extends EditorActionHandler {
         if (myOriginalHandler != null) {
             myOriginalHandler.execute(editor, caret, dataContext);
         }
+    }
+
+    @Override
+    public void execute(Editor editor, DataContext dataContext, Producer<Transferable> producer) {
+
     }
 }

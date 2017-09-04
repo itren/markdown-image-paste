@@ -36,10 +36,10 @@ import org.jetbrains.annotations.Nullable;
  * @Describle
  */
 @State(
-        name = "markdown-image-paste",
+        name = "markdown-image-paste-qiniu",
         storages = {
                 @Storage(
-                        id = "markdown-image-paste",
+                        id = "markdown-image-paste-qiniu",
                         file = "$APP_CONFIG$/markdown-image-paste-qiniu_config.xml"
                 )
         })
@@ -63,13 +63,35 @@ public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig.State> 
 
     public State state = new State();
 
-    public static final class State {
+    public static class State {
 
         public String accessKey;
         public String secretKey;
         public String bucket;
         public String upHost;
+        public QINIU_ZONE zone;
 
 
+    }
+
+    public static enum QINIU_ZONE {
+
+        QINIU_ZONE_EASE_CHINA("east_china"), QINIU_ZONE_NORTH_CHINA("north_china"),
+        QINIU_ZONE_SOUTH_CHINA("south_china"), QINIU_ZONE_NORTH_AMERICA("north_america");
+
+        private QINIU_ZONE(String zone) {
+
+            this.zone = zone;
+        }
+
+        private String zone;
+
+
+        @Override
+        public String toString() {
+            return "QINIU_ZONE{" +
+                    "zone='" + zone + '\'' +
+                    '}';
+        }
     }
 }
