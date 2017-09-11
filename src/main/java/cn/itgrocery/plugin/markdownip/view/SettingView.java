@@ -25,17 +25,13 @@ package cn.itgrocery.plugin.markdownip.view;
 
 import cn.itgrocery.plugin.markdownip.config.LocalConfig;
 import cn.itgrocery.plugin.markdownip.config.QiNiuConfig;
-import cn.itgrocery.plugin.markdownip.util.QiNiuUtils;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.Comparing;
-import com.intellij.util.messages.impl.Message;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author Shannon Chen
@@ -188,6 +184,12 @@ public class SettingView implements Configurable {
 
     @Nullable
     @Override
+    public String getHelpTopic() {
+        return null;
+    }
+
+    @Nullable
+    @Override
     public JComponent createComponent() {
         return settingContainer;
     }
@@ -252,6 +254,11 @@ public class SettingView implements Configurable {
         System.out.println(qiNiuState.upHost);
         System.out.println(qiNiuState.zone);
         System.out.println("***** END ********");
+
+    }
+
+    @Override
+    public void reset() {
 
     }
 }

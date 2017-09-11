@@ -8,25 +8,28 @@ buildscript {
         }
 
     }
-    dependencies {
-        classpath "gradle.plugin.org.jetbrains:gradle-intellij-plugin:0.1.10"
-
-    }
 }
 
-apply plugin: 'org.jetbrains.intellij'
-//above config for intelij idea
-
-apply plugin: 'java'
-
-group 'cn.itgrocery.markdownip'
-version 'v0.1.2'
-
-sourceCompatibility = 1.8
-
+plugins {
+    id "org.jetbrains.intellij" version "0.1.10"
+}
 repositories {
     mavenCentral()
 }
+
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+intellij {
+    version 'IC-2016.3' //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    plugins 'coverage' //Bundled plugin dependencies
+    pluginName 'markdown-image-paste'
+}
+
+group 'cn.itgrocery.markdownip'
+version 'v0.1.2'
 
 dependencies {
     compile 'com.qiniu:qiniu-java-sdk:7.2.+'
