@@ -23,9 +23,15 @@ apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
 intellij {
-    version 'IC-2016.3' //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    version 'IC-2016.3'
+    //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
     plugins 'coverage' //Bundled plugin dependencies
     pluginName 'markdown-image-paste'
+    intellij.updateSinceUntilBuild false
+    publish {
+        username System.getenv("USERNAME")
+        password System.getenv("PASSWORD")
+    }
 }
 
 group 'cn.itgrocery.markdownip'

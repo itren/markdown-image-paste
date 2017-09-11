@@ -8,7 +8,6 @@ local.properties
 ### Java ###
 *.class
 classes/
-gradle.properties
 
 ### Gradle ###
 .gradle
