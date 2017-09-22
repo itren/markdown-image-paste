@@ -25,7 +25,7 @@
 <idea-plugin>
     <id>cn.itgrocery.plugin.markdownip</id>
     <name>Markdown Image Paste</name>
-    <version>v0.1.2</version>
+    <version>0.1.2</version>
     <vendor email="351135612@qq.com" url="https://github.com/ITGrocery/markdown-image-paste">Github</vendor>
 
     <description><![CDATA[

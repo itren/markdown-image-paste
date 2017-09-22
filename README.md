@@ -19,52 +19,52 @@
 
 #### 离线安装
 
-你可以在本项目的 Release 中下载最新的 jar 包，然后在 InteliJ IDEA 的 Plugins 界面中点击 'Install plugin from disk'，然后在弹出的选项框中选择下载好的 jar 包加载即可。
+你可以在本项目的 [Release](https://plugins.jetbrains.com/plugin/10001-markdown-image-paste) 中下载最新的 ZIP 包，然后在 InteliJ IDEA 的 Plugins 界面中点击 'Install plugin from disk'，然后在弹出的选项框中选择下载好的 jar 包加载即可。
 
-![](/art/intelij-idea-plugins-location.png)
+![](art/intelij-idea-plugins-location.png)
 
 #### 在线安装
 
 在 InteliJ IDEA 的 Plugins 界面中选择 'Browse repositoreis' 浏览在线仓库，在搜索框中输入该插件的名称选择安装即可。
 
-![](/art/intelij-idea-plugin-browse_repositoreis-location.png)
+![](art/intelij-idea-plugin-browse_repositoreis-location.png)
 
 ## 配置
 
 为了将图片上传到对应的图床，我们需要填写相关的配置，目前只支持七牛云，在后续版本中会添加对其它图床的支持。你可以打开 InteliJ IDEA 的 Preferences，然后点击 Tools 选项框，在此类目的列表下你会看到 Markdown Image Paste 的设置项。
 
-![](/art/markdown-image-paste-setting.png)
+![](art/markdown-image-paste-setting.png)
 
 #### 本地文件配置
 
 | 配置项 | 说明 |
-| -- | -- |
+| --- | --- |
 | PreFix(前缀) | 此配置项会影响你文件名，文件的后缀为时间戳并且不允许用户修改 |
 
 
 #### 七牛云配置
 
 | 配置项 | 说明 |
-| -- | -- | -- |
+| --- | --- |
 | AccessKey | 你可以在七牛云中的秘钥管理中找到 |
 | Secretkey | 该参数与 AccessKey 在一起 |
 | Bucket | 该参数你的存储空间，你可以在存储空间列表中看到他们 |
-| Uphost | 上传的主机，是七牛云图片所存储的主机，默认情况下我们无法知道存储空间的主机是什么，所以需要用户自行填写，如果填写错误会造成生成的外链的地址有误。
-| Zone | 该参数为你存储空间所在的区域，目前有四个区域 EastChina(华东)、NorthChina(华北)、SouthChina(华南)、NorthAmerica(北美)。
+| Uphost | 上传的主机，是七牛云图片所存储的主机，默认情况下我们无法知道存储空间的主机是什么，所以需要用户自行填写，如果填写错误会造成生成的外链的地址有误。|
+| Zone | 该参数为你存储空间所在的区域，目前有四个区域 EastChina(华东)、NorthChina(华北)、SouthChina(华南)、NorthAmerica(北美)。|
 
 * AccessKey 与 SecretKey 所在的位置
 
-![](/art/qiniuyun-accesskey-secretkey-location.png)
+![](art/qiniuyun-accesskey-secretkey-location.png)
 
 * Bucket、Uphost、Zone 所在的位置
 
-![](/art/qiniuyun-zone-bucket-uphost-location.png)
+![](art/qiniuyun-zone-bucket-uphost-location.png)
 
 ## 使用
 
 该插件只会在 Markdown 文档中粘贴时才会进行响应。目前的快捷键是 'Ctrl + V'（Windows）、‘Command + V’（Mac） ，后续添加自定义快捷键功能。
 
-![](/art/markdown-image-paste-using.gif)
+![](art/markdown-image-paste-using.gif)
 
 ## 测试
 

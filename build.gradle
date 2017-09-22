@@ -28,6 +28,7 @@ intellij {
     plugins 'coverage' //Bundled plugin dependencies
     pluginName 'markdown-image-paste'
     intellij.updateSinceUntilBuild false
+    intellij.publish.channel 'beta'
     publish {
         username System.getenv("USERNAME")
         password System.getenv("PASSWORD")
