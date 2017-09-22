@@ -131,7 +131,8 @@ public class SettingView implements Configurable {
             alwaysSaveImageInCheckBox.setSelected(false);
         }
 
-        markdownImagePasteTextField.setText(localState.preFix);
+        if(localState.preFix == null)
+            markdownImagePasteTextField.setText("markdown-image-paste");
 
     }
 

@@ -35,9 +35,6 @@ intellij {
     }
 }
 
-group 'cn.itgrocery.markdownip'
-version 'v0.1.2'
-
 dependencies {
     compile 'com.qiniu:qiniu-java-sdk:7.2.+'
 }

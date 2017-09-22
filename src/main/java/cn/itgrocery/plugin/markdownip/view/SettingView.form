@@ -31,7 +31,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="sAWKWYjBXmju5_4q9Pa6DWJhDh5jo8UoWGeF301L"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="f0c14" class="javax.swing.JLabel">
@@ -49,7 +49,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Mfami9crAT-58jw5YRwWHazLNGASZBGlMtNwzr6p"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="d8ef5" class="javax.swing.JLabel">
@@ -67,7 +67,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="develop"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="16a72" class="javax.swing.JLabel">
@@ -85,7 +85,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="http://ovj3eplzj.bkt.clouddn.com"/>
+              <text value=""/>
             </properties>
           </component>
           <component id="aaa19" class="javax.swing.JLabel">

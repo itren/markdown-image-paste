@@ -74,12 +74,12 @@ public class QiNiuConfig implements PersistentStateComponent<QiNiuConfig.State> 
 
     }
 
-    public static enum QINIU_ZONE {
+    public enum QINIU_ZONE {
 
         QINIU_ZONE_EASE_CHINA("east_china"), QINIU_ZONE_NORTH_CHINA("north_china"),
         QINIU_ZONE_SOUTH_CHINA("south_china"), QINIU_ZONE_NORTH_AMERICA("north_america");
 
-        private QINIU_ZONE(String zone) {
+        QINIU_ZONE(String zone) {
 
             this.zone = zone;
         }
