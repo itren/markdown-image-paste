@@ -60,6 +60,8 @@
 
 ![](art/qiniuyun-zone-bucket-uphost-location.png)
 
+<font color=red>七牛云给出的Uphost是没有带http前缀的，所以我们在填写Uphost的时候需要加上，否则图片不会正常加载。</font>
+
 ## 使用
 
 该插件只会在 Markdown 文档中粘贴时才会进行响应。目前的快捷键是 'Ctrl + V'（Windows）、‘Command + V’（Mac） ，后续添加自定义快捷键功能。
